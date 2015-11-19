@@ -3,6 +3,7 @@ package parsing
 import "os/exec"
 import "io/ioutil"
 import "log"
+import "bytes"
 
 func Ocradout(filename string) []byte {
 	c := exec.Command("png2pnm", filename)
@@ -25,4 +26,9 @@ func Ocradout(filename string) []byte {
 		log.Fatal(err)
 	}
 	return bb
+}
+
+func OcradAlterProc(filename string, czasowe bool) {
+	b := Ocradout(filename)
+	c := bytes.Split(b, []byte{byte(10)})
 }
