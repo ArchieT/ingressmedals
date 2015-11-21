@@ -2,7 +2,7 @@ package parsing
 
 //import "regexp"
 
-var sortedbypositionczasowe = []string{
+var SortedByPositionCzasowe = []string{
 	`ap`,
 	`uniqvis`,
 	`seer`,
@@ -32,7 +32,7 @@ var sortedbypositionczasowe = []string{
 	`glyph`,
 }
 
-var sortedbypositionnow = []string{"ap", "linksactiv", "pwned", "fieldsactiv", "mucontrol"}
+var SortedByPositionNow = []string{"ap", "linksactiv", "pwned", "fieldsactiv", "mucontrol"}
 
 var origstrsdictbef = map[string]string{
 	"ap":              `^[_-]{0,3} ?`,

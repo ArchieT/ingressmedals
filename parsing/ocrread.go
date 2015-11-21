@@ -38,9 +38,9 @@ func Proc(filename string, czasowe bool) map[string]uint32 {
 	c := bytes.Split(b, []byte{byte(10)})
 	var o []string
 	if czasowe {
-		o = sortedbypositionczasowe
+		o = SortedByPositionCzasowe
 	} else {
-		o = sortedbypositionnow
+		o = SortedByPositionNow
 	}
 	elements := make(map[string][]byte)
 	for _, j := range o {
