@@ -31,4 +31,10 @@ func Ocradout(filename string) []byte {
 func OcradAlterProc(filename string, czasowe bool) {
 	b := Ocradout(filename)
 	c := bytes.Split(b, []byte{byte(10)})
+	if czasowe {
+		o := sortedbypositionczasowe
+	} else {
+		o := sortedbypositionnow
+	}
+	//for
 }
