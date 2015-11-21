@@ -5,8 +5,6 @@ import "io/ioutil"
 import "log"
 import "bytes"
 import "regexp"
-import "strconv"
-import "log"
 import "os"
 
 var DebugTrace = log.New(os.Stderr, "DEBUGOCR ", log.LstdFlags)
@@ -37,10 +35,11 @@ func Ocradout(filename string) []byte {
 func OcradAlterProc(filename string, czasowe bool) map[string]uint32 {
 	b := Ocradout(filename)
 	c := bytes.Split(b, []byte{byte(10)})
+	var o []string
 	if czasowe {
-		o := sortedbypositionczasowe
+		o = sortedbypositionczasowe
 	} else {
-		o := sortedbypositionnow
+		o = sortedbypositionnow
 	}
 	elements := make(map[string][]byte)
 	for _, j := range o {
@@ -50,7 +49,7 @@ func OcradAlterProc(filename string, czasowe bool) map[string]uint32 {
 				break
 			}
 			go func() {
-				found := fullr.Find(ln)
+				found := fullr.Find(c[ln])
 				if found != nil {
 					elements[j] = found
 				}
