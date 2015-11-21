@@ -9,7 +9,7 @@ import "os"
 
 var DebugTrace = log.New(os.Stderr, "DEBUGOCR ", log.LstdFlags)
 
-func Ocradout(filename string) []byte {
+func ocradout(filename string) []byte {
 	c := exec.Command("png2pnm", filename)
 	b := exec.Command("ocrad", "-i", "--scale=-1")
 	pipe, err := b.StdinPipe()
@@ -32,8 +32,9 @@ func Ocradout(filename string) []byte {
 	return bb
 }
 
-func OcradAlterProc(filename string, czasowe bool) map[string]uint32 {
-	b := Ocradout(filename)
+//Proc processes your image; czasowe bool is whether it is AllTime/Month/Week (true) or Now (false)
+func Proc(filename string, czasowe bool) map[string]uint32 {
+	b := ocradout(filename)
 	c := bytes.Split(b, []byte{byte(10)})
 	var o []string
 	if czasowe {

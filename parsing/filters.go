@@ -22,6 +22,7 @@ var ufs = []univfilter{
 	{regexp.MustCompile(`\D`), []byte{}},
 }
 
+//UnivFilter fixes most common ocrad digit reading errors
 func UnivFilter(b []byte) []byte {
 	c := b
 	for i := range ufs {
@@ -30,13 +31,13 @@ func UnivFilter(b []byte) []byte {
 	return c
 }
 
-func Filter(b []byte, elem string) []byte {
+func filter(b []byte, elem string) []byte {
 	c := regexp.MustCompile(origstrsdictbef[elem]).ReplaceAll(b, []byte{})
 	c = regexp.MustCompile(origstrsdictaft[elem]).ReplaceAll(c, []byte{})
 	return UnivFilter(c)
 }
 
-func IntExtraction(b []byte) uint32 {
+func intExtraction(b []byte) uint32 {
 	a, err := strconv.ParseUint(string(b), 10, 32)
 	if err != nil {
 		DebugTrace.Fatal(err)
@@ -44,6 +45,7 @@ func IntExtraction(b []byte) uint32 {
 	return uint32(a)
 }
 
+//Extract gives you the uint32
 func Extract(b []byte, elem string) uint32 {
-	return IntExtraction(Filter(b, elem))
+	return intExtraction(filter(b, elem))
 }
